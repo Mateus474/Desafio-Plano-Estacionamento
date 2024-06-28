@@ -1,17 +1,23 @@
 N = int(input("digite o numero de vagas: "))
 M = int(input("digite quantos clientes estão esperando: "))
 lista_vagas = []
-ocupadas_count = 0
 carros_estacionados = 0
 for i in range(M):
     V_i = int(input("digite sua posição: "))
-    lista_vagas.append(V_i)
-    for j in range(1, V_i + 1):
-        if ocupadas_count < N:
-            carros_estacionados += 1
-            ocupadas_count += 1
-            encontrado = True
-            break
-        else:
-            break
-print(carros_estacionados)
+    while V_i > N or V_i < 1:
+        print("vaga invalida")
+        V_i = int(input("digite sua posição: "))
+    if V_i in lista_vagas:
+        while V_i in lista_vagas:
+            V_i -=1
+        lista_vagas.append(V_i)
+        carros_estacionados += 1
+        if V_i == 0:
+                del(lista_vagas[i])
+                carros_estacionados -= 1
+                print(f"Carros estacionados: {carros_estacionados}")
+                exit()
+    else:
+        lista_vagas.append(V_i)
+        carros_estacionados += 1
+print(f"Carros estacionados: {carros_estacionados}")
